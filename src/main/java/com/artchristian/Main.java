@@ -16,25 +16,4 @@ public class Main {
 		SpringApplication.run(Main.class, args);
 	}
 
-	@GetMapping("/greet")
-	public GreetResponse greet(
-			@RequestParam(value = "name", required = false) String name) {
-		String greetMessage = name == null || name.isBlank() ? "Hello" : "Hello " + name;
-
-		GreetResponse response = new GreetResponse(
-				greetMessage,
-				List.of("Java", "C++", "VBA", "Javascript"),
-				new Person(name, 33, 1_000_000));
-		return response;
-	}
-
-	record Person(String name, int age, double money) {
-
-	}
-
-	record GreetResponse(String greet,
-						 List<String> favProgrammingLanguages,
-						 Person person
-						 ){ }
-
 }
