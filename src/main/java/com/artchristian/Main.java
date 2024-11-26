@@ -3,6 +3,7 @@ package com.artchristian;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.management.ValueExp;
@@ -41,6 +42,17 @@ public class Main {
 	@GetMapping("api/v1/customers")
 	public static List<Customer> getCustomers() {
 		return customers;
+	}
+
+	@GetMapping("api/v1/customers/{customerId}")
+	public Customer getCustomer(
+			@PathVariable("customerId") Integer customerId){
+		Customer customer = customers.stream()
+				.filter(c -> c.id.equals(customerId))
+				.findFirst()
+				.orElseThrow(
+						() -> new IllegalArgumentException("customer with id [%s] not found".formatted(customerId)));
+		return customer;
 	}
 
 	static class Customer {
