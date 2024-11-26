@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.management.ValueExp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,11 +13,32 @@ import java.util.Objects;
 @RestController
 public class Main {
 
+	private static List<Customer> customers;
+
+	static {
+		customers = new ArrayList<>();
+		Customer alex = new Customer(
+				1,
+				"Art",
+				"art@gmail.com",
+				33
+		);
+		customers.add(alex);
+		Customer mina = new Customer(
+				2,
+				"Mina",
+				"mina@gmail.com",
+				32
+		);
+		customers.add(mina);
+	}
+
 	public static void main(String[] args) {
+		System.out.println(customers);
 		SpringApplication.run(Main.class, args);
 	}
 
-	class Customer {
+	static class Customer {
 		private Integer id;
 		private String name;
 		private String email;
@@ -85,5 +108,7 @@ public class Main {
 			return Objects.hash(id, name, email, age);
 		}
 	}
+
+
 
 }
