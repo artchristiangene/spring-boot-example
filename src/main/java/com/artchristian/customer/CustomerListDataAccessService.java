@@ -1,14 +1,13 @@
 package com.artchristian.customer;
 
-import com.artchristian.Main;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class CustomerDataAccessService implements CustomerDao{
+@Repository("list")
+public class CustomerListDataAccessService implements CustomerDao{
     private static List<Customer> customers;
 
     @Override
