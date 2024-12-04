@@ -1,6 +1,7 @@
 package com.artchristian.customer;
 
-import com.artchristian.exception.ResourceNotFound;
+import com.artchristian.exception.DuplicateResourceException;
+import com.artchristian.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,23 @@ public class CustomerService {
     public Customer getCustomer(Integer id){
         return customerDao.selectCustomerById(id)
                 .orElseThrow(
-                        ()-> new ResourceNotFound(
+                        ()-> new ResourceNotFoundException(
                                 "Customer with ID [%s] is not found".formatted(id)));
+    }
+
+    public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
+        //check if email exists
+        String email  = customerRegistrationRequest.email();
+        if(customerDao.existsPersonWithEmail(email)){
+            throw new DuplicateResourceException(
+                    "email already taken");
+        }
+        Customer customer = new Customer(
+                customerRegistrationRequest.name(),
+                customerRegistrationRequest.email(),
+                customerRegistrationRequest.age()
+        );
+        customerDao.insertCustomer(customer);
     }
 }
 
