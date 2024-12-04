@@ -40,6 +40,13 @@ public class Customer {
         this.age = age;
     }
 
+    public Customer(String name, String email, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+
     public Customer() {
     }
 
