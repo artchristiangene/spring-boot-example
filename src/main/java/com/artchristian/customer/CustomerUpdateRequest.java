@@ -1,6 +1,7 @@
 package com.artchristian.customer;
 
-public record CustomerRegistrationRequest(
+public record CustomerUpdateRequest(
+        Integer id,
         String name,
         String email,
         Integer age) {
