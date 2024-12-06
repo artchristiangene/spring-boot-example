@@ -10,4 +10,5 @@ public interface CustomerDao {
     void insertCustomer(Customer customer);
     boolean existsPersonWithEmail(String email);
     boolean existsPersonWithID(Integer id);
+    void updateCustomer(Customer customer);
 }

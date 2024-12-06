@@ -46,6 +46,11 @@ public class CustomerListDataAccessService implements CustomerDao{
                 .anyMatch(c -> c.getEmail().equals(id));
     }
 
+    @Override
+    public void updateCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
 
     static {
         customers = new ArrayList<>();
