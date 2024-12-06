@@ -24,10 +24,9 @@ public class CustomerListDataAccessService implements CustomerDao{
 
     @Override
     public void deleteCustomer(Integer id) {
-        Optional<Customer> customer = customers.stream()
+        customers.stream()
                 .filter(c -> c.getId().equals(id))
-                .findFirst();
-        customers.remove(customer);
+                .findFirst().ifPresent(customers::remove);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class CustomerListDataAccessService implements CustomerDao{
     @Override
     public boolean existsPersonWithID(Integer id) {
         return customers.stream()
-                .filter(c-> c.getId().equals(id)).findAny().isPresent();
+                .anyMatch(c -> c.getEmail().equals(id));
     }
 
 

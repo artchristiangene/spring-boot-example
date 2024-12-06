@@ -42,7 +42,7 @@ public class CustomerService {
         customerDao.insertCustomer(customer);
     }
 
-    public void deleteCustomer(Integer id){
+    public void deleteCustomerByID(Integer id){
         if(customerDao.existsPersonWithID(id)){
             customerDao.deleteCustomer(id);
         }
