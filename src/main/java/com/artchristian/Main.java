@@ -33,7 +33,6 @@ public class Main {
 			);
 			List<Customer> customers = List.of(alex, mina);
 			//customerRepository.saveAll(customers);
-
 		};
 	}
 }
