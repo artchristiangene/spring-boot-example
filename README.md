@@ -7,3 +7,4 @@ Topics discussed:
 2. Docker
 3. Postgres
 4. Flyway
+5. Javatestcontainers
