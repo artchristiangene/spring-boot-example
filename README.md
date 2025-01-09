@@ -8,3 +8,4 @@ Topics discussed:
 3. Postgres
 4. Flyway
 5. Javatestcontainers
+6. Mockito
