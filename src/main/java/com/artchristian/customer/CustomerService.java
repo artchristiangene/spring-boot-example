@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -25,8 +24,8 @@ public class CustomerService {
     public Customer getCustomer(Integer id){
         return customerDao.selectCustomerById(id)
                 .orElseThrow(
-                        ()-> new ResourceNotFoundException(
-                                "Customer with ID [%s] is not found".formatted(id)));
+                ()-> new ResourceNotFoundException(
+                "Customer with ID [%s] is not found".formatted(id)));
     }
 
     public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
