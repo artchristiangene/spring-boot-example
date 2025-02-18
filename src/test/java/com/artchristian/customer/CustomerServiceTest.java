@@ -165,7 +165,7 @@ class CustomerServiceTest {
         //When
         String newEmail = "christian@gmail.com";
         when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, "Christian", newEmail, 31);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest("Christian", newEmail, 31);
         underTest.updateCustomerById(id, updateRequest);
 
 
@@ -176,7 +176,6 @@ class CustomerServiceTest {
         verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getId()).isEqualTo(updateRequest.id());
         assertThat(capturedCustomer.getName()).isEqualTo(updateRequest.name());
         assertThat(capturedCustomer.getEmail()).isEqualTo(updateRequest.email());
         assertThat(capturedCustomer.getAge()).isEqualTo(updateRequest.age());
@@ -197,7 +196,7 @@ class CustomerServiceTest {
         String newEmail = "christian@gmail.com";
         when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(true);
 
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, "Christian", newEmail, 31);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest("Christian", newEmail, 31);
 
         assertThatThrownBy(() -> underTest.updateCustomerById(id, updateRequest))
                 .isInstanceOf(DuplicateResourceException.class)
@@ -222,7 +221,7 @@ class CustomerServiceTest {
         //String newEmail = "christian@gmail.com";
         String newName = "Christian";
         //when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, newName,null,null);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(newName,null,null);
         underTest.updateCustomerById(id, updateRequest);
 
 
@@ -233,7 +232,6 @@ class CustomerServiceTest {
         verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getId()).isEqualTo(updateRequest.id());
         assertThat(capturedCustomer.getName()).isEqualTo(updateRequest.name());
         assertThat(capturedCustomer.getEmail()).isEqualTo(customer.getEmail());
         assertThat(capturedCustomer.getAge()).isEqualTo(customer.getAge());
@@ -254,7 +252,7 @@ class CustomerServiceTest {
         String newEmail = "christian@gmail.com";
 
         when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, null,newEmail,null);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(null,newEmail,null);
         underTest.updateCustomerById(id, updateRequest);
 
 
@@ -265,7 +263,6 @@ class CustomerServiceTest {
         verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getId()).isEqualTo(updateRequest.id());
         assertThat(capturedCustomer.getName()).isEqualTo(customer.getName());
         assertThat(capturedCustomer.getEmail()).isEqualTo(updateRequest.email());
         assertThat(capturedCustomer.getAge()).isEqualTo(customer.getAge());
@@ -286,7 +283,7 @@ class CustomerServiceTest {
         //String newEmail = "christian@gmail.com";
         int newAge = 32;
         //when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(false);
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, null,null,newAge);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(null,null,newAge);
         underTest.updateCustomerById(id, updateRequest);
 
 
@@ -297,7 +294,6 @@ class CustomerServiceTest {
         verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getId()).isEqualTo(updateRequest.id());
         assertThat(capturedCustomer.getName()).isEqualTo(customer.getName());
         assertThat(capturedCustomer.getEmail()).isEqualTo(customer.getEmail());
         assertThat(capturedCustomer.getAge()).isEqualTo(updateRequest.age());
@@ -318,7 +314,7 @@ class CustomerServiceTest {
         String newName = "Art";
         String newEmail = "art@gmail.com";
         int newAge = 30;
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, newName,newEmail, newAge);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(newName,newEmail, newAge);
 
         assertThatThrownBy(() -> underTest.updateCustomerById(id, updateRequest))
                 .isInstanceOf(BadRequestException.class)
@@ -344,7 +340,7 @@ class CustomerServiceTest {
         //When
         //String newEmail = "christian@gmail.com";
         //when(customerDao.existsPersonWithEmail(newEmail)).thenReturn(true);
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(id, null,null, null);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(null,null, null);
 
         assertThatThrownBy(() -> underTest.updateCustomerById(id, updateRequest))
                 .isInstanceOf(BadRequestException.class)
