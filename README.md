@@ -10,3 +10,9 @@ Topics discussed:
 5. Javatestcontainers
 6. Mockito
 7. Spring Webflux
+8. CI/CD
+9. Maven
+10. Surefire Plugin
+11. Failsafe Plugin
+12. Jib
+13. Docker Hub
